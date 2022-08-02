@@ -7,7 +7,11 @@ import PORT from './config.js'
 
 const app = express();
 const server = http.createServer(app)
-const io = new SocketServer(server)
+const io = new SocketServer(server, {
+    cors: {
+        origin: 'http://localhost:3000',
+    }
+})
 
 app.use(cors())
 // morgan for terminal dump info

@@ -13,5 +13,9 @@ app.use(cors())
 // morgan for terminal dump info
 app.use(morgan('dev'))
 
-app.listen(PORT);
+io.on('connection', ()=> {
+    console.log('Socket.io connected')
+})
+
+server.listen(PORT);
 console.log('Server started on port ', PORT);

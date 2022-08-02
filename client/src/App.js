@@ -1,12 +1,17 @@
 import './App.css';
 import io from 'socket.io-client';
+import React from 'react'
 
-const socket = io('http://localhost:4000');
+// eslint-disable-next-line
+const socket = io('http://localhost:4000'); 
 
 function App() {
   return (
     <div className="App">
-      <h1>Testing</h1>
+      <form>
+        <input type="text" />
+        <button>Send</button>
+      </form>
     </div>
   );
 }

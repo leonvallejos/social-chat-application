@@ -22,7 +22,10 @@ io.on('connection', (socket)=> {
     socket.on('message', function(message){
         
         // send message all clients(front)
-        socket.broadcast.emit('message', message)
+        socket.broadcast.emit('message', {
+            body: message,
+            from: socket.id
+        })
         console.log(message);
     })
 })

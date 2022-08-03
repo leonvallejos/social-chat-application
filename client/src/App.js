@@ -14,16 +14,23 @@ function App() {
         e.preventDefault()
         console.log(message);
         socket.emit('message', message) // name and value
+        setMessage('');
     }
 
     useEffect(()=> {
-        socket.on('message', message => console.log(message))
+        const receiveMessage = message => {
+            console.log(message);
+        }
+        socket.on('message', receiveMessage)
+        return()=> {
+            socket.off('message', receiveMessage)  
+        }
     }, [])
 
   return (
     <div className="App">
       <form onSubmit={handleSubmit}> 
-        <input type="text" onChange={e => setMessage(e.target.value)}/>
+        <input type="text" onChange={e => setMessage(e.target.value)} value='message'/>
         <button>Send</button>
       </form>
     </div>

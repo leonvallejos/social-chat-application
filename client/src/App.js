@@ -9,6 +9,7 @@ const socket = io('http://localhost:4000');
 
 function App() {
     const [message, setMessage] = useState('');
+    const [messages, setMessages] = useState([]);
 
     const handleSubmit = (e) => {
         e.preventDefault()

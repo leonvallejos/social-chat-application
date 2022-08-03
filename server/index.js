@@ -20,6 +20,9 @@ app.use(morgan('dev'))
 io.on('connection', (socket)=> {
     console.log(socket.id)
     socket.on('message', function(message){
+        
+        // send message all clients(front)
+        socket.broadcast.emit('message', message)
         console.log(message);
     })
 })

@@ -6,14 +6,21 @@ Chat in real-time web application using React and Node Js, communicating through
 
 ## Installation
 
-Download the project and use it with Live Server (index.html):
+Download the project and run commands:
+
+For frontend:
 ```
-git clone https://github.com/leonvallejos/ip-inspector.git
-cd ip-inspector
+git clone https://github.com/leonvallejos/social-chat-application.git
+cd social-chat-application
+cd client
+npm start
 ```
 
-*Live Server for VSCODE:
-[INSTALL](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)*
+For backend:
+```
+cd server
+npm run dev
+```
 
 ## Project development
 
@@ -24,7 +31,7 @@ As for the main script, it was developed purely with [javascript](https://develo
 ## Documentation and live demos
 
 *For developers: [API IP Inspector](https://rapidapi.com/ipregistry3-ipregistry/api/ip-geolocation-and-threat-detection/).*
-*Demo of IP Inspector: https://ip-inspector.netlify.app/*
+*Demo of Social Chat Application: [social-app-nodejss.herokuapp.com](https://social-app-nodejss.herokuapp.com/)*
 
 ## License
 

@@ -1,6 +1,7 @@
 # Social Chat Application
 
-IP Geolocation and Threat Detection. Pinpoint your users’ locations, customize their experiences, prevent fraud, ensure compliance, and so much more.
+Chat in real-time web application using React and Node Js, communicating through Socket.io
+
 ![](./screenshot.jpg)
 
 ## Installation

@@ -1,53 +1,63 @@
-import './App.css';
-import io from 'socket.io-client';
-import React from 'react'
-import { useState, useEffect } from 'react';
-import { Socket } from 'socket.io';
+import { useEffect, useState } from "react";
+import io from "socket.io-client";
 
-// eslint-disable-next-line
-const socket = io('http://localhost:4000'); 
+// const socket = io("http://localhost:3001");
+const socket = io("/");
 
-function App() {
-    const [message, setMessage] = useState('');
-    const [messages, setMessages] = useState([]);
+export default function App() {
+  const [messages, setMessages] = useState([]);
+  const [message, setMessage] = useState("");
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log(message);
-        socket.emit('message', message) // name and value
-        const newMessage = {
-            body: message,
-            from: 'Me'
-        }
-        setMessages([newMessage, ...messages])
-        setMessage('');
-        
-    }
+  useEffect(() => {
+    const receiveMessage = (message) => {
+      setMessages([message, ...messages]);
+    };
 
-    useEffect(()=> {
-        const receiveMessage = (message) => {
-            setMessages([message, ...messages])
-        }
-        socket.on('message', receiveMessage)
-        return()=> {
-            socket.off('message', receiveMessage)  
-        }
-    }, [messages])
+    socket.on("message", receiveMessage);
+
+    return () => {
+      socket.off("message", receiveMessage);
+    };
+  }, [messages]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newMessage = {
+      body: message,
+      from: "Me",
+    };
+    setMessages([newMessage, ...messages]);
+    setMessage("");
+    socket.emit("message", newMessage.body);
+  };
 
   return (
-    <div className="App">
-      <form onSubmit={handleSubmit}> 
-        <input type="text" onChange={e => setMessage(e.target.value)} value={message}/>
-        <button>Send</button>
-      </form>
-        {messages.map((message, index) => (
-            <div key={index}>
-                <p>{message.from}: {message.body}</p>
-            </div>
-        ))}
+    <div className="h-screen bg-zinc-800 text-white flex items-center justify-center">
+      <form onSubmit={handleSubmit} className="bg-zinc-900 p-10">
+        <h1 className="text-2xl font-bold my-2">Chat React</h1>
+        <input
+          name="message"
+          type="text"
+          placeholder="Write your message..."
+          onChange={(e) => setMessage(e.target.value)}
+          className="border-2 border-zinc-500 p-2 w-full text-black"
+          value={message}
+          autoFocus
+        />
 
+        <ul className="h-80 overflow-y-auto">
+          {messages.map((message, index) => (
+            <li
+              key={index}
+              className={`my-2 p-2 table text-sm rounded-md ${
+                message.from === "Me" ? "bg-sky-700 ml-auto" : "bg-black"
+              }`}
+            >
+              <b>{message.from}</b>:{message.body}
+            </li>
+          ))}
+        </ul>
+      </form>
     </div>
   );
 }
-
-export default App;

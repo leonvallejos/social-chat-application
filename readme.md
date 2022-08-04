@@ -1,6 +1,7 @@
 # Social Chat Application
 
 IP Geolocation and Threat Detection. Pinpoint your users’ locations, customize their experiences, prevent fraud, ensure compliance, and so much more.
+![](./screenshot.jpg)
 
 ## Installation
 
